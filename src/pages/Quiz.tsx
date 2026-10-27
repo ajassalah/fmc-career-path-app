@@ -2,22 +2,17 @@ import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLang } from '../i18n/LangContext';
 import { getNextQuestion, submitAnswer, undoAnswer, isQuestion } from '../lib/api';
-
-const SUSPENSE = [
-  'Interesting…',
-  'Your answers point somewhere unexpected.',
-  'One more thing…',
-  "We're getting close.",
-];
+import { QUESTION_TRANSLATIONS } from '../data/questions';
 
 interface QuestionData {
   id: string;
   prompt: string;
-  options: { id: string; label: string }[];
+  promptAr?: string;
+  options: { id: string; label: string; labelAr?: string }[];
 }
 
 export default function Quiz() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const navigate = useNavigate();
   const sessionId = localStorage.getItem('pathora_session') || '';
 
@@ -41,7 +36,9 @@ export default function Quiz() {
       }
       setQuestion(result.question);
       setProgress(result.progress);
-      setSuspense(SUSPENSE[answerCount % SUSPENSE.length]);
+      if (t.quiz.suspense.length > 0) {
+        setSuspense(t.quiz.suspense[answerCount % t.quiz.suspense.length]);
+      }
     } finally {
       setLoading(false);
     }
@@ -111,29 +108,37 @@ export default function Quiz() {
                 marginBottom: '1.5rem',
                 lineHeight: 1.35,
               }}>
-                {question.prompt}
+                {lang === 'ar'
+                  ? (question.promptAr || QUESTION_TRANSLATIONS[question.id]?.promptAr || question.prompt)
+                  : question.prompt}
               </h2>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.625rem' }}>
-                {question.options.map((opt) => (
-                  <button
-                    key={opt.id}
-                    id={`quiz-opt-${opt.id}`}
-                    className={`option-card${selected === opt.id ? ' selected' : ''}`}
-                    onClick={() => handleOption(opt.id)}
-                    disabled={!!selected}
-                    aria-pressed={selected === opt.id}
-                  >
-                    {selected === opt.id ? (
-                      <span style={{ width: 20, height: 20, borderRadius: '50%', background: 'var(--color-teal)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                        <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="1.5" strokeLinecap="round"/></svg>
-                      </span>
-                    ) : (
-                      <span style={{ width: 20, height: 20, borderRadius: '50%', border: '2px solid rgba(14,124,134,0.3)', flexShrink: 0 }} />
-                    )}
-                    {opt.label}
-                  </button>
-                ))}
+                {question.options.map((opt) => {
+                  const optLabel = lang === 'ar'
+                    ? (opt.labelAr || QUESTION_TRANSLATIONS[question.id]?.options[opt.id] || opt.label)
+                    : opt.label;
+
+                  return (
+                    <button
+                      key={opt.id}
+                      id={`quiz-opt-${opt.id}`}
+                      className={`option-card${selected === opt.id ? ' selected' : ''}`}
+                      onClick={() => handleOption(opt.id)}
+                      disabled={!!selected}
+                      aria-pressed={selected === opt.id}
+                    >
+                      {selected === opt.id ? (
+                        <span style={{ width: 20, height: 20, borderRadius: '50%', background: 'var(--color-teal)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                          <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="1.5" strokeLinecap="round"/></svg>
+                        </span>
+                      ) : (
+                        <span style={{ width: 20, height: 20, borderRadius: '50%', border: '2px solid rgba(14,124,134,0.3)', flexShrink: 0 }} />
+                      )}
+                      {optLabel}
+                    </button>
+                  );
+                })}
               </div>
             </>
           ) : null}

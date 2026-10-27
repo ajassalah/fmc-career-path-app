@@ -50,7 +50,7 @@ export default function Start() {
             style={{ fontSize: '1.05rem' }}
           >
             <span style={{ fontSize: '1.5rem' }}>{AGE_EMOJIS[i]}</span>
-            <span>{AGE_LABELS[i]}</span>
+            <span>{t.start.ages[i] || AGE_LABELS[i]}</span>
             {selected === band && loading && (
               <span style={{ marginInlineStart: 'auto', fontSize: '0.875rem', color: 'var(--color-teal)' }}>✓</span>
             )}

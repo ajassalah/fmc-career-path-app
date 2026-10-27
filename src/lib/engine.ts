@@ -19,7 +19,12 @@ export interface NextQuestionDone {
 
 export interface NextQuestionActive {
   done: false;
-  question: { id: string; prompt: string; options: { id: string; label: string }[] };
+  question: {
+    id: string;
+    prompt: string;
+    promptAr?: string;
+    options: { id: string; label: string; labelAr?: string }[];
+  };
   progress: number;
 }
 
@@ -191,7 +196,12 @@ export const engine = {
     const progress = session.answeredOrder.length / 7;
     return {
       done: false,
-      question: { id: q.id, prompt: q.prompt, options: q.options.map(o => ({ id: o.id, label: o.label })) },
+      question: {
+        id: q.id,
+        prompt: q.prompt,
+        promptAr: q.promptAr,
+        options: q.options.map(o => ({ id: o.id, label: o.label, labelAr: o.labelAr })),
+      },
       progress,
     };
   },
