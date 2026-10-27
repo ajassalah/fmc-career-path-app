@@ -1,0 +1,107 @@
+// ─── i18n strings: English ────────────────────────────────────
+const en = {
+  appName: 'Pathora',
+  tagline: 'Your Future, Your Path',
+  presentedBy: 'Presented by Find My Career',
+  findMyCareerId: 'Find My Career',
+  nav: {
+    login: 'Already have a login?',
+    logout: 'Log out',
+    langToggle: 'العربية',
+  },
+  landing: {
+    hero: 'Discover the career that fits you',
+    pill: '7 minutes · Find your Career',
+    cta: 'Start my journey',
+    benefits: [
+      { title: 'Adaptive questions', desc: 'Each answer shapes the next question — no two paths are the same.' },
+      { title: 'Personal report', desc: 'Your top 3 careers, a step-by-step pathway, and a 30-90-365 day plan.' },
+      { title: 'Portal + expert chat', desc: 'Access your report anytime and chat directly with our career team.' },
+    ],
+  },
+  start: {
+    title: 'How old are you?',
+    subtitle: 'This only sets our starting point.',
+    ages: ['16–20', '21–25', '26–30', '31–35', '36+'],
+  },
+  quiz: {
+    suspense: [
+      'Interesting…',
+      'Your answers point somewhere unexpected.',
+      'One more thing…',
+      "We're getting close.",
+    ],
+    back: 'Back',
+  },
+  teaser: {
+    heading: 'We found 3 careers that fit you',
+    subheading: 'YOUR TOP MATCH',
+    unlock: 'Unlock my full report',
+    price: 'AED 99',
+    bullets: ['Full report with top 3 careers', 'Step-by-step pathway', '30-90-365 day action plan', 'Portal access + expert chat'],
+  },
+  details: {
+    title: 'Almost there – tell us a little about yourself',
+    name: 'Full name',
+    email: 'Email address',
+    phone: 'Mobile number',
+    country: 'Country',
+    countries: ['UAE', 'Saudi Arabia', 'Qatar', 'Kuwait', 'Oman', 'Bahrain'],
+    consent: 'I agree to the privacy policy (guardian consent if under 18)',
+    cta: 'Continue to payment',
+  },
+  payment: {
+    title: 'Complete your order',
+    summary: 'Pathora Career Report',
+    desc: 'Full report + portal access',
+    methods: ['Card', 'Mada', 'KNET', 'Apple Pay'],
+    cta: 'Pay AED 99 (demo)',
+    demo: 'Demo payment — no real charge',
+    processing: 'Processing…',
+    success: 'Payment successful!',
+  },
+  reportReady: {
+    subject: 'Your Pathora report is ready',
+    greeting: 'Hi',
+    body: "Your personalised career report is ready. Log in to your portal to view your report and chat with our career team.",
+    openPortal: 'Open my portal',
+  },
+  report: {
+    profileLabel: 'You are a',
+    topCareers: 'Your top careers',
+    pathway: 'Your pathway',
+    plan: 'Your action plan',
+    planTabs: ['30 days', '90 days', '1 year'],
+    downloadPdf: 'Download PDF',
+    share: 'Share',
+    copied: 'Link copied!',
+    matchLabel: 'match',
+  },
+  portal: {
+    greeting: 'Welcome back',
+    tabs: ['My report', 'My plan', 'Chat with our team'],
+    chatPlaceholder: 'Type a message…',
+    send: 'Send',
+    staffNote: 'Staff replies usually within a few hours',
+    planEmpty: 'Your plan items will appear here.',
+    chatWelcome: (name: string) => `Hi ${name}! I'm Sara from the Pathora team. Ask me anything about your report.`,
+  },
+  staff: {
+    title: 'Demo staff view',
+    badge: 'DEMO',
+    selectChat: 'Select a conversation',
+    reply: 'Reply',
+    replyPlaceholder: 'Type your reply…',
+  },
+  login: {
+    title: 'Log in to your portal',
+    username: 'Username',
+    password: 'Password',
+    cta: 'Log in',
+    hint: 'Use the login shown after payment',
+    error: 'Incorrect username or password.',
+  },
+};
+
+export default en;
+export type I18n = typeof en;
